@@ -26,9 +26,21 @@ jobs:
     - name: Add MSBuild to PATH
       uses: microsoft/setup-msbuild@v2
 
-    - name: Build
+#    - name: Build
+#      working-directory: ${{env.GITHUB_WORKSPACE}}
+#      run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform="AnyCPU" ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build x86
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform="AnyCPU" ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform="x86" ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build x64
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform="x64" ${{env.SOLUTION_FILE_PATH}}
+
+    - name: Build ARM64
+      working-directory: ${{env.GITHUB_WORKSPACE}}
+      run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform="ARM64" ${{env.SOLUTION_FILE_PATH}}
     
 #    - run: mkdir -p path/to/artifact
 #    - run: echo hello > path/to/artifact/world.txt
