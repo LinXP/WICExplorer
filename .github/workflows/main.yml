@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-2022
     strategy:
       matrix:
-        buildPlatform: [x64, x86, ARM64]
+#        buildPlatform: [x64, x86, ARM64]
         buildConfiguration: [Release]
 
     steps:
@@ -28,7 +28,7 @@ jobs:
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform=${{matrix.buildPlatform}} ${{env.SOLUTION_FILE_PATH}}
+      run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform="AnyCPU" ${{env.SOLUTION_FILE_PATH}}
     
 #    - run: mkdir -p path/to/artifact
 #    - run: echo hello > path/to/artifact/world.txt
@@ -36,5 +36,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-       name: WICExplorer_${{matrix.buildPlatform}}_${{matrix.buildConfiguration}}.zip
-       path: build\bin\${{matrix.buildPlatform}}
+       name: WICExplorer_${{matrix.buildConfiguration}}.zip
+       path: build\bin\
