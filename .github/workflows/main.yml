@@ -29,10 +29,18 @@ jobs:
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform=${{matrix.buildPlatform}} ${{env.SOLUTION_FILE_PATH}}
-      
-    - name: Upload artifacts
+    
+    - run: mkdir -p path/to/artifact
+    - run: echo hello > path/to/artifact/world.txt
+    
+    - name: Upload artifacts1
       uses: actions/upload-artifact@v4
       with:
-       name: ep_bin_multi_${{ steps.vars.outputs.sha_short }}_${{ steps.vars.outputs.branch }}
-       path: |
-            build/bin/
+       name: my-artifact1
+       path: path/to/artifact/
+       
+    - name: Upload artifacts2
+      uses: actions/upload-artifact@v4
+      with:
+       name: my-artifact_${{matrix.buildPlatform}}
+       path: path/to/artifact/
