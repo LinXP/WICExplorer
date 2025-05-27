@@ -30,17 +30,11 @@ jobs:
       working-directory: ${{env.GITHUB_WORKSPACE}}
       run: msbuild /v:m /m /p:Configuration=${{matrix.buildConfiguration}} /p:Platform=${{matrix.buildPlatform}} ${{env.SOLUTION_FILE_PATH}}
     
-    - run: mkdir -p path/to/artifact
-    - run: echo hello > path/to/artifact/world.txt
+#    - run: mkdir -p path/to/artifact
+#    - run: echo hello > path/to/artifact/world.txt
     
-    - name: Upload artifacts1
+    - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-       name: my-artifact1
-       path: path/to/artifact/
-       
-    - name: Upload artifacts2
-      uses: actions/upload-artifact@v4
-      with:
-       name: my-artifact_${{matrix.buildPlatform}}
-       path: path/to/artifact/
+       name: wicexplorer_${{matrix.buildPlatform}}_${{matrix.buildConfiguration}}
+       path: build\bin\ARM64
