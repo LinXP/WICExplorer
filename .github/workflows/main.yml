@@ -36,5 +36,5 @@ jobs:
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
       with:
-       name: wicexplorer_${{matrix.buildPlatform}}_${{matrix.buildConfiguration}}
-       path: build\bin\ARM64
+       name: WICExplorer_${{matrix.buildPlatform}}_${{matrix.buildConfiguration}}.zip
+       path: build\bin\${{matrix.buildPlatform}}
